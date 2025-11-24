@@ -48,7 +48,7 @@ const items = [
 
 export default function BentoGrid() {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6 auto-rows-[180px]">
+    <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6 auto-rows-[minmax(220px,auto)]">
       {items.map((item, index) => (
         <motion.div
           key={index}
@@ -56,7 +56,7 @@ export default function BentoGrid() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: index * 0.1 }}
-          className={`relative group overflow-hidden rounded-3xl p-6 md:p-8 flex flex-col justify-between ${item.className} bg-gradient-to-br ${item.gradient} shadow-xl`}
+          className={`relative group overflow-hidden rounded-3xl p-6 flex flex-col justify-between ${item.className} bg-gradient-to-br ${item.gradient} shadow-xl`}
         >
           <div className="absolute top-0 right-0 p-6 opacity-10 group-hover:opacity-20 transition-opacity duration-500 transform group-hover:scale-110 group-hover:rotate-12">
             <item.icon className="w-24 h-24 text-white" />
