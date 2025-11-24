@@ -1,0 +1,647 @@
+You are an expert senior full-stack engineer and product designer.  
+Your task is to build a **premium, highly polished demo website** for a real estate agency called **“The Key Inmobiliaria”**, located in **Armenia, Quindío, Colombia**.
+
+The goal is for this demo to feel like a **$5,000–$8,000 USD / 20M+ COP agency project**:
+- Visual quality at **Apple / Airbnb** level.
+- UX designed for **conversion**.
+- Codebase clean and scalable, so it can become the production site.
+
+This demo must:
+1) Mantain and reinterpret the **current brand colors** used on their existing website.
+2) Add **“magic”**: micro-animations, gradients, glassmorphism, and a storytelling experience that feels premium and emotional.
+
+====================================
+TECH STACK & PROJECT SETUP
+====================================
+- Create a **React + Vite + Tailwind CSS** project.
+- JavaScript is ok (no need for TypeScript unless you want).
+- Install **Framer Motion** for subtle animations:
+  - `npm install framer-motion`
+
+Project structure:
+
+- `src/`
+  - `components/`
+    - `Navbar.jsx`
+    - `Hero.jsx`
+    - `SearchPanel.jsx`
+    - `BentoGrid.jsx`
+    - `PropertyCard.jsx`
+    - `FiltersBar.jsx`
+    - `PropertyModal.jsx`
+    - `OwnersWizardForm.jsx`
+    - `StatsGrid.jsx`
+    - `TestimonialCard.jsx`
+    - `BlogCard.jsx`
+    - `ContactForm.jsx`
+    - `FloatingWhatsAppButton.jsx`
+    - `SectionHeader.jsx` (reusable section title + subtitle wrapper)
+  - `sections/`
+    - `HomeHeroSection.jsx`
+    - `HowWeHelpSection.jsx`
+    - `FeaturedPropertiesSection.jsx`
+    - `OwnersSection.jsx`
+    - `WhyUsSection.jsx`
+    - `TestimonialsSection.jsx`
+    - `BlogSection.jsx`
+    - `ContactSection.jsx`
+  - `data/`
+    - `properties.js`
+    - `testimonials.js`
+    - `blogPosts.js`
+    - `stats.js`
+  - `hooks/`
+    - `useFilteredProperties.js`
+  - `pages/`
+    - `HomePage.jsx`
+  - `App.jsx`
+  - `main.jsx`
+
+Configure Tailwind correctly and ensure the app runs with `npm run dev`.
+
+====================================
+BRAND & DESIGN LANGUAGE (KEEP CURRENT COLORS)
+====================================
+The demo must **respect and reinterpret the current brand** from `thekeyinmobiliaria.com`, but with a modern, premium twist.
+
+In Tailwind config, extend a **brand palette** inspired by a Colombian real estate brand:
+
+```js
+// tailwind.config.js (conceptual example – implement this)
+theme: {
+  extend: {
+    colors: {
+      brand: {
+        // PRIMARY: dark / navy tone inspired by current brand
+        primary: '#0B1F3B',   // deep navy (adjust to exact brand hex if known)
+        primarySoft: '#1E293B',
+        // SECONDARY: golden / warm accent (call-to-actions, highlights)
+        secondary: '#F4B000', // warm gold (adjust if needed)
+        // ACCENTS: fresh green and soft neutral for trust & nature (Quindío)
+        accent: '#22C55E',    // emerald
+        accentSoft: '#BBF7D0',
+      },
+    },
+  },
+}
+If you know the exact brand hex values, replace these placeholders, but keep the hierarchy:
+
+Dark primary for navigation and text.
+
+Warm secondary for detail and small elements.
+
+Fresh accent for CTAs and active states.
+
+General visual guidelines:
+
+Typography:
+
+Use font-sans with Inter or Outfit (load via Google Fonts).
+
+Backgrounds:
+
+Main page background: very soft neutral (#F9FAFB) with subtle patterns:
+
+Use background gradients (bg-gradient-to-br) and light noise / grid patterns (via background-image utilities or pseudo-elements).
+
+Cards & Surfaces:
+
+Strong use of glassmorphism:
+
+bg-white/80 or bg-slate-900/40 (for dark overlays)
+
+backdrop-blur-xl
+
+border border-white/20 or border-slate-100/60
+
+rounded-3xl
+
+shadow-2xl shadow-slate-900/30 on dark backgrounds, shadow-xl shadow-slate-200/60 on light.
+
+Interactions & Magic:
+
+Use Framer Motion for:
+
+Hero content fade-in + slight upward movement on load.
+
+Sections that appear with scroll-based animations (staggered fadeInUp).
+
+Cards that slightly float on hover (scale and y transform).
+
+Add animated gradient accents:
+
+For example, a pill behind the hero title with a moving gradient.
+
+Subtle animated gradient borders on important cards.
+
+Responsive:
+
+Mobile-first design.
+
+Make sure the layout feels natural on phones:
+
+Stacked sections, full-width cards, sticky top navbar, simplified filters.
+
+====================================
+PAGE STRUCTURE (SINGLE PAGE DEMO)
+Single-page SPA with smooth scroll between sections.
+
+ORDER:
+
+Floating / Sticky Navbar
+
+Hero Section with Full-Width Background + Magical Layered Gradient + Search
+
+Bento Grid “Cómo te ayudamos”
+
+Featured Properties with Filters + Detail Modal
+
+Owners (Propietarios) Section + Multi-step Wizard Form
+
+Why Choose The Key Inmobiliaria (Stats + Differentiators)
+
+Testimonials
+
+Blog / Resources Preview
+
+Contact & WhatsApp CTA
+
+Footer
+
+FLOATING / STICKY NAVBAR
+
+Navbar.jsx:
+
+Positioned within a top container:
+
+On desktop:
+
+sticky top-4 z-50
+
+Inner bar: bg-white/80 border border-white/40 rounded-full backdrop-blur-xl shadow-lg
+
+Content:
+
+Left: Logo placeholder (text: “The Key Inmobiliaria” + small icon).
+
+Center: Horizontal nav links (anchor scroll):
+
+“Inicio”, “Comprar / Arrendar”, “Propietarios”, “Por qué nosotros”, “Blog”, “Contacto”.
+
+Right:
+
+Primary button: “Consignar inmueble”
+
+bg-brand.accent hover:bg-emerald-600 text-white px-5 py-2 rounded-full font-semibold
+
+Outline button or pill: “WhatsApp” with icon.
+
+On mobile:
+
+Simplify to brand + hamburger menu.
+
+Hamburger opens an animated dropdown using Framer Motion (fade + slide from top).
+
+The dropdown uses brand colors and large touch targets.
+
+HERO SECTION: FULL-WIDTH BACKGROUND + MAGIC + SEARCH
+
+HomeHeroSection.jsx + Hero.jsx + SearchPanel.jsx:
+
+Design:
+
+Hero background:
+
+Full-width section with layered background:
+
+Base: high-quality image (Unsplash) representing Armenia / Quindío (mountains, coffee, nature, city).
+
+Overlay: multi-layer gradient:
+
+bg-gradient-to-br from-slate-950/90 via-slate-900/70 to-brand.primary/80
+
+Add a subtle parallax effect:
+
+On scroll, slightly move the background image Y-position with a small factor.
+
+Content (centered in a max-w-7xl mx-auto container):
+
+Small eyebrow label:
+
+“Inmobiliaria en Armenia y el Quindío”
+
+Style: pill with bg-white/10 text-emerald-200 border border-white/20 rounded-full px-4 py-1 text-xs uppercase tracking-wide.
+
+Main headline (2 lines max):
+
+Example:
+
+“Tu llave a los mejores inmuebles en el Quindío.”
+
+Use a big, elegant font-weight with gradient text (from brand.secondary to brand.accent).
+
+Subheadline:
+
+“Compra, vende e invierte con un equipo experto que te acompaña en cada paso.”
+
+Two CTAs:
+
+Primary (solid): “Quiero comprar o arrendar”
+
+Secondary (ghost / outline): “Quiero consignar mi inmueble”
+
+Use Framer Motion:
+
+Animate label, title, text, and buttons in sequence (staggered).
+
+Search Panel:
+
+A floating glass card overlapping the hero bottom (-mt-10 on desktop):
+
+bg-white/90 rounded-3xl shadow-2xl border border-slate-100 backdrop-blur
+
+Layout:
+
+On desktop: 4 columns (operation, type, location, price, search button).
+
+On mobile: vertical stacked.
+
+Fields:
+
+Operation: select (Comprar, Arrendar, Todos).
+
+Type: select (Apartamento, Casa, Local, Lote, Oficina, Bodega).
+
+Location: select/text (Armenia, La Tebaida, Circasia, etc. – mock).
+
+Price: min & max inputs.
+
+Button: “Buscar inmuebles”
+
+On click, updates filter state used in FeaturedPropertiesSection.
+
+BENTO GRID “CÓMO TE AYUDAMOS”
+
+HowWeHelpSection.jsx + BentoGrid.jsx:
+
+Title & subtitle at top:
+
+“¿Cómo te ayudamos?” / “Servicios pensados para compradores, arrendatarios y propietarios.”
+
+Use a responsive Bento grid:
+
+Big card: “Comprar tu próximo hogar” (spans 2 columns).
+
+Big card: “Invertir en renta en el Quindío”.
+
+Smaller cards:
+
+“Arrendar con tranquilidad”
+
+“Administración de propiedades”
+
+“Avalúos y asesoría jurídica”
+
+Each card:
+
+Glassmorphism style over a subtle brand-colored gradient.
+
+Icon/emoji (e.g. 🏡, 📈, 📝, 🤝, ⚖️).
+
+2–3 lines of text.
+
+Hover:
+
+Slight lift (-translate-y-1), shadow-2xl, border glowing with brand.secondary/40.
+
+Use Framer Motion to animate cards on scroll (staggered, fade + slight upward motion).
+
+FEATURED PROPERTIES WITH FILTERS + MODAL
+
+FeaturedPropertiesSection.jsx + FiltersBar.jsx + PropertyCard.jsx + PropertyModal.jsx + useFilteredProperties.js:
+
+Section:
+
+Title: “Inmuebles destacados”
+
+Subtitle: “Una selección curada de propiedades en Armenia y el Quindío.”
+
+FiltersBar:
+
+Display a row of interactive pill filters:
+
+State filters: Todos, En venta, En arriendo.
+
+Dropdowns:
+
+Tipo de inmueble.
+
+Ciudad.
+
+Optional sorting:
+
+“Más recientes”, “Menor precio”, “Mayor precio”.
+
+Style: pills with bg-white/70 border border-slate-200 rounded-full text-sm px-4 py-1, active using bg-brand.accent text-white.
+
+Properties data:
+
+Create src/data/properties.js with at least 8–10 properties:
+
+Fields: id, title, operation (buy | rent), type, city, neighborhood, price, area, bedrooms, bathrooms, parking, tags, images, featured, description.
+
+In useFilteredProperties, implement filtering logic by operation, type, city, and price.
+
+Cards:
+
+PropertyCard:
+
+Image with aspect-[4/3] and object-cover, rounded-3xl.
+
+Badge top-left: En venta / En arriendo with brand colors.
+
+Tag row: Nuevo, Campestre, Oportunidad, etc.
+
+Title, location, price, and key facts (area, rooms, baths, parking).
+
+Hover:
+
+Subtle zoom-in on image, raise card, highlight border.
+
+Modal:
+
+On click “Ver detalles”, open PropertyModal:
+
+Use fixed inset-0 overlay with dark BG (bg-slate-950/70) and blurred background.
+
+Inner card: large, glass, with:
+
+Gallery of images (thumbnails + main).
+
+Detailed description.
+
+Features list (chips).
+
+CTA buttons:
+
+“Agendar visita”
+
+“Quiero más información”
+
+Small note telling where the lead would go later.
+
+OWNERS SECTION + MULTI-STEP WIZARD FORM
+
+OwnersSection.jsx + OwnersWizardForm.jsx:
+
+Left side:
+
+Headline: “¿Necesitas vender o arrendar tu inmueble?”
+
+Subheadline: “Nos encargamos de todo el proceso para que tu propiedad siempre esté en las mejores manos.”
+
+3 steps visually:
+
+“Valoramos tu inmueble y definimos el precio ideal.”
+
+“Lo publicamos en los principales portales y gestionamos las visitas.”
+
+“Seleccionamos al mejor inquilino o comprador.”
+
+Each step with icon and mini card.
+
+Right side – Wizard:
+
+3 steps wizard with a progress indicator (dots or progress bar):
+
+Step 1: Datos del inmueble
+
+Tipo de inmueble, ciudad, barrio, área aproximada, valor estimado.
+
+Step 2: Datos del propietario
+
+Nombre completo, email, teléfono, preferencia de contacto (WhatsApp / Llamada / Email).
+
+Step 3: Detalles adicionales
+
+Campo texto grande (“Cuéntanos algo más de tu inmueble...”).
+
+Behavior:
+
+Use useState to track current step and form data.
+
+Buttons: Anterior, Siguiente, Enviar solicitud.
+
+On submit:
+
+Simulate API call (e.g., setTimeout) then show success screen with a nice illustration/icon and message:
+
+“¡Gracias! Un asesor de The Key Inmobiliaria te contactará muy pronto.”
+
+Important:
+
+Add clear placeholder comments (for future GHL integration):
+
+js
+Copiar código
+// TODO: Replace this mock submit with a real GHL (GoHighLevel) webhook or embedded form.
+// This is the integration point for the client's CRM / marketing automation.
+WHY CHOOSE THE KEY (STATS + DIFFERENTIATORS)
+
+WhyUsSection.jsx + StatsGrid.jsx:
+
+Structure:
+
+Left: Differentiators
+
+Right: Stats
+
+Differentiators:
+
+Cards or vertical list with icons:
+
+“Administración de propiedades 360°”
+
+“Asesoría jurídica y financiera”
+
+“Especialistas en el mercado del Quindío”
+
+“Acompañamiento desde la búsqueda hasta la firma”
+
+Stats:
+
+Use data from src/data/stats.js, e.g.:
+
++10 años de experiencia.
+
++300 inmuebles administrados.
+
+<30 días promedio para arrendar.
+
+95% ocupación promedio.
+
+Visual:
+
+Large number in gradient (bg-clip-text text-transparent bg-gradient-to-r from-brand.secondary to-brand.accent).
+
+Label under number.
+
+Add subtle Framer Motion animations: stats pop-in with a slight scale effect on scroll.
+
+TESTIMONIALS
+
+TestimonialsSection.jsx + TestimonialCard.jsx:
+
+Title: “Lo que dicen nuestros clientes”.
+
+Source mock data from src/data/testimonials.js:
+
+name, role (Comprador, Arrendatario, Propietario), quote, rating.
+
+Design:
+
+On desktop: 3 cards in a row with slight overlap or stagger.
+
+On mobile: horizontal scroll (carousel) with snap (snap-x snap-mandatory + overflow-x-auto).
+
+Each card:
+
+Glass card with quotation mark icon.
+
+Quote text (balanced length).
+
+Name & role.
+
+Star rating row.
+
+Add “magic” by using Framer Motion to animate cards horizontally or to create subtle hover tilt effect if desired.
+
+BLOG / RESOURCES PREVIEW
+
+BlogSection.jsx + BlogCard.jsx:
+
+Title: “Guías para tomar mejores decisiones inmobiliarias”.
+
+Subheadline referencing existing content types (e.g., “¿Sueñas con vivir de la renta?”, “Recomendaciones a la hora de comprar un inmueble.”).
+
+3 blog cards:
+
+Category pill.
+
+Title (2 lines max).
+
+Short description (2–3 lines).
+
+“Leer artículo →” link.
+
+On hover:
+
+Card lifts slightly, title color shifts to brand.secondary, and the arrow icon moves a bit to the right with a transition.
+
+CONTACT & WHATSAPP CTA
+
+ContactSection.jsx + ContactForm.jsx + FloatingWhatsAppButton.jsx:
+
+Section:
+
+Left:
+
+Title: “¿Listo para hablar con un asesor?”
+
+Text describing channels.
+
+Contact info (mock, inspired by real site):
+
+Dirección en Armenia.
+
+Teléfono fijo.
+
+WhatsApp destacado.
+
+Correo electrónico.
+
+Right:
+
+Contact form:
+
+Nombre, Email, Teléfono, “Estoy interesado en” (select: Comprar, Arrendar, Consignar, Invertir), Mensaje.
+
+On submit:
+
+Show success state with brand-colored check icon and confirmation text.
+
+Add comments for GHL / CRM integration in the submit handler.
+
+Floating WhatsApp button:
+
+Component FloatingWhatsAppButton:
+
+fixed bottom-6 right-6 z-40
+
+Circular button with WhatsApp icon (placeholder).
+
+bg-green-500 hover:bg-green-600 text-white rounded-full shadow-2xl.
+
+On click, open https://wa.me/<mockNumber> in a new tab.
+
+FOOTER
+
+Footer.jsx:
+
+Background slightly darker than main background (bg-brand.primarySoft).
+
+3–4 columns:
+
+Brand + short description.
+
+Navegación.
+
+Servicios.
+
+Contacto + redes sociales (Facebook, Instagram, YouTube, LinkedIn).
+
+Bottom line:
+
+“© {currentYear} The Key Inmobiliaria. Todos los derechos reservados.”
+
+Add a subtle top border gradient using brand colors.
+
+====================================
+INTERACTIVITY, UX & MAGIC DETAILS
+Smooth scrolling for navbar anchors using scrollIntoView({ behavior: "smooth" }).
+
+Framer Motion:
+
+Implement a generic FadeInWhenVisible component using Intersection Observer or viewport prop from Framer Motion to reuse animations across sections.
+
+Skeleton loaders:
+
+For property cards, briefly show skeletons before displaying the mock data (simulate network latency).
+
+Scroll progress indicator:
+
+Optional: slim progress bar at top showing scroll progress through page.
+
+All of this should be implemented with clean React components and Tailwind classes only (no inline CSS), with thoughtful naming and comments for future integrations.
+
+====================================
+GOAL REMINDER
+This is a high-impact sales demo for a real client:
+
+It must feel faithful to The Key Inmobiliaria’s current brand colors, but elevated to a modern, high-end digital experience.
+
+It should wow visually (gradients, glassmorphism, animations) without becoming noisy.
+
+The UX should clearly guide:
+
+Buyers/tenants to explorar inmuebles.
+
+Owners to consign their properties.
+
+Leads to contact via forms / WhatsApp.
+
+Deliver a complete, ready-to-run React + Vite + Tailwind + Framer Motion project that a senior agency would be proud to present as a 20M COP proposal.
+
+makefile
+Copiar código
+::contentReference[oaicite:0]{index=0}
