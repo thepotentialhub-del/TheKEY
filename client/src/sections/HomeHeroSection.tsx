@@ -79,7 +79,7 @@ export default function HomeHeroSection() {
       </div>
 
       {/* Search Panel */}
-      <div className="w-full px-4 relative -mt-8 mb-8 md:mb-0 md:mt-0 md:absolute md:bottom-0 md:translate-y-1/2 z-20">
+      <div className="w-full px-4 relative -mt-8 mb-8 md:mb-0 md:mt-0 md:absolute md:bottom-20 md:translate-y-0 z-20">
         <SearchPanel />
       </div>
     </section>
