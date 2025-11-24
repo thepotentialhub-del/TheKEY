@@ -35,13 +35,13 @@ export default function SearchPanel() {
           </div>
 
           {/* Type */}
-          <div className="md:col-span-3 space-y-2">
-            <label className="text-xs font-semibold text-slate-500 uppercase tracking-wider ml-1">Tipo de Inmueble</label>
+          <div className="md:col-span-2 space-y-2">
+            <label className="text-xs font-semibold text-slate-500 uppercase tracking-wider ml-1">Tipo</label>
             <Select>
               <SelectTrigger className="h-12 rounded-xl border-slate-200 bg-slate-50/50">
                 <div className="flex items-center gap-2 truncate">
                   <Home className="w-4 h-4 text-brand-secondary shrink-0" />
-                  <SelectValue placeholder="Todos los tipos" />
+                  <SelectValue placeholder="Tipo" />
                 </div>
               </SelectTrigger>
               <SelectContent>
@@ -76,14 +76,14 @@ export default function SearchPanel() {
             </Select>
           </div>
 
-          {/* Price (Simplified for demo) */}
-          <div className="md:col-span-2 space-y-2">
+          {/* Price */}
+          <div className="md:col-span-3 space-y-2">
              <label className="text-xs font-semibold text-slate-500 uppercase tracking-wider ml-1">Presupuesto</label>
              <Popover>
               <PopoverTrigger asChild>
-                <Button variant="outline" className="w-full h-12 justify-start text-left font-normal rounded-xl border-slate-200 bg-slate-50/50">
-                  <DollarSign className="w-4 h-4 mr-2 text-brand-secondary" />
-                  <span>${(priceRange[0]/1000000).toFixed(0)}M - ${(priceRange[1]/1000000).toFixed(0)}M</span>
+                <Button variant="outline" className="w-full h-12 justify-start text-left font-normal rounded-xl border-slate-200 bg-slate-50/50 px-3">
+                  <DollarSign className="w-4 h-4 mr-2 text-brand-secondary shrink-0" />
+                  <span className="truncate">${(priceRange[0]/1000000).toFixed(0)}M - ${(priceRange[1]/1000000).toFixed(0)}M</span>
                 </Button>
               </PopoverTrigger>
               <PopoverContent className="w-80 p-4">
