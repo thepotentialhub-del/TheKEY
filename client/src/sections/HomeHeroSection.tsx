@@ -67,19 +67,19 @@ export default function HomeHeroSection() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.6 }}
-          className="flex flex-col sm:flex-row gap-4 justify-center"
+          className="flex flex-col sm:flex-row gap-4 justify-center w-full max-w-md sm:max-w-none mx-auto"
         >
-          <button className="px-8 py-4 rounded-full bg-brand-accent hover:bg-emerald-600 text-white font-semibold text-lg shadow-lg shadow-emerald-500/30 transition-transform hover:-translate-y-1">
+          <button className="w-full sm:w-auto px-6 py-3 md:px-8 md:py-4 rounded-full bg-brand-accent hover:bg-emerald-600 text-white font-semibold text-base md:text-lg shadow-lg shadow-emerald-500/30 transition-transform hover:-translate-y-1">
             Quiero comprar o arrendar
           </button>
-          <button className="px-8 py-4 rounded-full bg-white/10 hover:bg-white/20 border border-white/30 backdrop-blur-md text-white font-semibold text-lg transition-transform hover:-translate-y-1">
+          <button className="w-full sm:w-auto px-6 py-3 md:px-8 md:py-4 rounded-full bg-white/10 hover:bg-white/20 border border-white/30 backdrop-blur-md text-white font-semibold text-base md:text-lg transition-transform hover:-translate-y-1">
             Quiero consignar mi inmueble
           </button>
         </motion.div>
       </div>
 
       {/* Search Panel */}
-      <div className="w-full px-4 absolute bottom-0 translate-y-1/2 z-20">
+      <div className="w-full px-4 relative -mt-8 mb-8 md:mb-0 md:mt-0 md:absolute md:bottom-0 md:translate-y-1/2 z-20">
         <SearchPanel />
       </div>
     </section>

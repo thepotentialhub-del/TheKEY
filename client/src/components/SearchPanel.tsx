@@ -15,7 +15,7 @@ export default function SearchPanel() {
       initial={{ y: 50, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ delay: 0.6, duration: 0.8 }}
-      className="w-full max-w-6xl mx-auto -mt-12 md:-mt-20 relative z-30 px-4"
+      className="w-full max-w-6xl mx-auto relative z-30"
     >
       <div className="bg-white/90 backdrop-blur-xl rounded-3xl shadow-2xl border border-white/50 p-4 md:p-6">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-4 items-end">
